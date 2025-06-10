@@ -1,0 +1,6 @@
+site\stellarburgers\nomoreparties\tests\BaseTest.class
+site\stellarburgers\nomoreparties\tests\InvalidPasswordTest.class
+site\stellarburgers\nomoreparties\tests\SuccessfulRegistrationTest.class
+site\stellarburgers\nomoreparties\tests\LogoutTest.class
+site\stellarburgers\nomoreparties\tests\SwitchToPersonaFieldsTest.class
+site\stellarburgers\nomoreparties\tests\TransitionsTest.class

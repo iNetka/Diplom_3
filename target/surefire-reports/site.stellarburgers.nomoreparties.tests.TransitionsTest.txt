@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: site.stellarburgers.nomoreparties.tests.TransitionsTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.173 s - in site.stellarburgers.nomoreparties.tests.TransitionsTest

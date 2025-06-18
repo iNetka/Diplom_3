@@ -18,6 +18,9 @@ public class ProfilePage {
 
     //локатор на кнопку "Выйти"
     private By buttonExit = By.xpath(".//nav//li/button[text() = 'Выход']");
+    private By profilePageTitle = By.xpath("//*[@id=\"root\"]/div/main/div/nav/p");
+    private By constructorButton = By.xpath("//*[@id=\"root\"]/div/header/nav/ul/li[1]/a/p");
+
 
     @Step("Ожидание загрузки страницы")
     public void waitLoadPage() {
@@ -29,6 +32,16 @@ public class ProfilePage {
     public void clickButtonExit() {
         waitLoadPage();
         driver.findElement(buttonExit).click();
+    }
+
+    @Step("Проверка нахождения в личном кабинете")
+    public boolean checkIfOnProfilePage() {
+        return driver.findElement(profilePageTitle).isDisplayed();
+    }
+
+    @Step("Переход в конструктор")
+    public void clickConstructor() {
+        driver.findElement(constructorButton).click();
     }
 
 }

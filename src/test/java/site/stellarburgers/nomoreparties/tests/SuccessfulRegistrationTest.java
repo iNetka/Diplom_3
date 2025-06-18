@@ -1,27 +1,59 @@
 package site.stellarburgers.nomoreparties.tests;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import io.restassured.response.Response;
+import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import site.stellarburgers.nomoreparties.api.Credentials;
+
+
+import static org.junit.Assert.*;
+import static site.stellarburgers.nomoreparties.config.AppConfig.APP_URL;
 
 public class SuccessfulRegistrationTest extends BaseTest {
 
-    String name = RandomStringUtils.randomAlphabetic(6);
-    String email = "pypypy@" + RandomStringUtils.randomAlphabetic(6) + ".ru";
-    String password = RandomStringUtils.randomAlphabetic(6);
+    private final static String NAME = faker.name().firstName();
+    private final static String EMAIL = faker.internet().emailAddress();
+    private final static String PASSWORD = faker.internet().password(8, 16, true, true, true);
 
     @Test
     public void registrationWithValidPassword() {
 
         mainPage.clickAccountButton();
-        WebElement element = driver.findElement(By.xpath(".//div/p/a[@href=\"/register\"]"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         registerPage.waitLoadPage();
         registerPage.clickButtonRegister();
-        registerPage.register(name, email, password);
+        registerPage.register(NAME, EMAIL, PASSWORD);
+    }
 
+    @After
+    public void deleteUser() {
+        try {
+            // 1. Логинимся
+            Credentials creds = new Credentials(EMAIL, PASSWORD);
+            Response loginResponse = apiUser.login(creds);
+
+            if (loginResponse.statusCode() != 200) {
+                System.out.println("Login failed! Status: " + loginResponse.statusCode() +
+                        ", Body: " + loginResponse.asString());
+                return;
+            }
+
+            // 2. Удаляем пользователя
+            Response deleteResponse = apiUser.delete(loginResponse);
+
+            if (deleteResponse == null) {
+                fail("Delete failed - no access token");
+                return;
+            }
+
+            int statusCode = deleteResponse.statusCode();
+            System.out.println("Delete status: " + statusCode);
+
+            assertTrue(statusCode == 200 || statusCode == 202);
+
+        } catch (Exception e) {
+            System.out.println("Error in deleteUser: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

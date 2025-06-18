@@ -17,6 +17,7 @@ public class LoginPage {
     }
 
     WebDriver driver;
+    private final By enterLabel = By.xpath("//h2[contains(.,'Вход')]");
 
     private final By incorrectPassword = By.xpath(".//p[text() = 'Некорректный пароль']");
 
@@ -28,11 +29,22 @@ public class LoginPage {
     private final By buttonSignIn = By.xpath(".//button[text() = 'Войти']");
 
     private final By buttonRegister = By.xpath(".//div/p/a[@href=\"/register\"]");
+    private final By recoverPasswordButton = By.xpath("//a[contains(.,'Восстановить пароль')]");
 
     @Step("Ожидание появления текста")
     public void waitTextUserAlreadyRegistered() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(userAlreadyRegistered));
+    }
+
+    @Step("Нажать кнопку 'Восстановить пароль'")
+    public void clickRecoverPassword() {
+        driver.findElement(recoverPasswordButton).click();
+    }
+
+    public boolean checkIfOnLoginPage(){
+        return driver.findElement(enterLabel).isDisplayed();
+
     }
 
     //Метод поиска текста "Такой пользователь уже существует" при повторной регистрации такого же пользователя

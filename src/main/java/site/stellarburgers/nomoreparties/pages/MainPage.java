@@ -18,6 +18,8 @@ public class MainPage {
     private By mainButton = By.xpath(".//div/header/nav/div[@class]");
     //главная кнопка
 
+    private By enterAccountButton = By.xpath("//button[contains(.,'Войти в аккаунт')]");
+
     private By accountProfile = By.xpath(".//nav/a/p[@class=\"AppHeader_header__linkText__3q_va ml-2\"]");
     //личный кабинет
 
@@ -34,17 +36,18 @@ public class MainPage {
     //регистрация
 
 
-    private By sectionBuns = By.xpath(".//div/span[text() = 'Булки']");
-    //раздел "соусы"
-    private By sectionSauce = By.xpath(".//div/span[text() = 'Соусы']");
-    //раздел "начинки"
-    private By sectionFilling = By.xpath(".//div/span[text() = 'Начинки']");
+    private By sectionBuns = By.xpath("//div[contains(@class,'tab_tab_type_current') and .//span[text()='Булки']]");
     //раздел "булки"
+    private By sectionSauce = By.xpath(".//div/span[text() = 'Соусы']");
+    //раздел "соусы"
+    private By sectionFilling = By.xpath(".//div/span[text() = 'Начинки']");
+    //раздел "начинки"
 
     private By selectedSectionBuns = By.xpath(".//div[contains(@class, 'tab_tab_type_current')]//span[text() = 'Булки']");
     //выбран раздел "соусы"
     private By selectedSectionSauce = By.xpath(".//div[contains(@class, 'tab_tab_type_current')]//span[text() = 'Соусы']");
     //выбран раздел "начинки"
+    private By constructorTitle = By.xpath("//h1[contains(.,'Соберите бургер')]");
 
     private By selectedSectionFilling = By.xpath(".//div[contains(@class, 'tab_tab_type_current')]//span[text() = 'Начинки']");
     //локатор на кнопку "Конструктор"
@@ -73,6 +76,9 @@ public class MainPage {
         wait.until(ExpectedConditions.elementToBeClickable(mainButton));
     }
 
+    public boolean checkIfConstructorTitleVisible(){
+        return driver.findElement(constructorTitle).isDisplayed();
+    }
 
     @Step("Надпись Соберите бургер")
     public void waitBurger() {
@@ -103,6 +109,23 @@ public class MainPage {
     public void waitFilling() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(selectedSectionFilling));
+    }
+
+    @Step("Клик по кнопке войти в аккаунт")
+    public void clickAccountButtonMainPage() {
+        driver.findElement(enterAccountButton).click();
+    }
+
+    public boolean checkFillings(){
+        return driver.findElement(sectionFilling).isDisplayed();
+    }
+
+    public boolean checkSauce(){
+        return driver.findElement(sectionSauce).isDisplayed();
+    }
+
+    public boolean checkBuns(){
+        return driver.findElement(sectionBuns).isDisplayed();
     }
 
     @Step("Клик по разделу Булки")

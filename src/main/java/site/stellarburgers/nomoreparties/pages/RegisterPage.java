@@ -18,11 +18,11 @@ public class RegisterPage {
 
 
     //локатор поле Имя
-    private By fieldName = By.xpath(".//fieldset[1]//div/input");
+    private By fieldName = By.xpath(".//label[text()='Имя']/following-sibling::input");
     //локатор поле Email
-    private By fieldEmail = By.xpath(".//fieldset[2]//div/input");
+    private By fieldEmail = By.xpath(".//label[text()='Email']/following-sibling::input");
     //локатор поле Пароль
-    private By fieldPassword = By.xpath(".//div/input[@name = 'Пароль']");
+    private By fieldPassword = By.xpath(".//*[text()='Пароль']/following-sibling::input");
     //локатор кнопки "Зарегистрироваться"
     private By buttonRegister = By.xpath(".//a[@class =\"Auth_link__1fOlj\" ]");
     private By buttonSignIn = By.xpath(".//p/a[text() = 'Войти']");

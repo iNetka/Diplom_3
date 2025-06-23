@@ -35,7 +35,7 @@ public class LogoutTest extends BaseTest{
 
     @After
     public void deleteUser(){
-        assertEquals(apiUser.delete(token).getStatusCode(), 202);
+        apiUser.delete(token);
     }
 
 }

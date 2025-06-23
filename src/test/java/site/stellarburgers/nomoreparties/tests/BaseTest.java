@@ -28,7 +28,8 @@ public abstract class BaseTest {
 
     @Before
     public void setUp() {
-        driver = setDriver("chrome");
+        String browser = System.getProperty("browser", "chrome"); // "chrome" - значение по умолчанию
+        driver = setDriver(browser);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(11));
         loginPage = new LoginPage(driver);

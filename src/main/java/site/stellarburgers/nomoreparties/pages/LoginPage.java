@@ -19,7 +19,7 @@ public class LoginPage {
     WebDriver driver;
     private final By enterLabel = By.xpath("//h2[contains(.,'Вход')]");
 
-    private final By incorrectPassword = By.xpath(".//p[text() = 'Некорректный пароль']");
+    private final By incorrectPasswordText = By.xpath(".//p[text() = 'Некорректный пароль']");
 
     private final By fieldName = By.xpath(".//fieldset[1]//div/input");
     private final By fieldPassword = By.xpath(".//div/input[@name = 'Пароль']");
@@ -55,9 +55,8 @@ public class LoginPage {
     }
 
     @Step("Текст Некорректный пароль при вводе пароля менее 6 символов")
-    public void findTextIncorrectPassword() {
-        WebElement invalidElement = driver.findElement(incorrectPassword);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", invalidElement);
+    public boolean isTextIncorrectPassword() {
+        return driver.findElement(incorrectPasswordText).isDisplayed();
     }
 
     @Step("Текст Зарегистрироваться")

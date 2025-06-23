@@ -2,6 +2,8 @@ package site.stellarburgers.nomoreparties.tests;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+
 public class InvalidPasswordTest extends BaseTest {
     private final static String NAME = faker.name().firstName();
     private final static String EMAIL = faker.internet().emailAddress();
@@ -14,7 +16,7 @@ public class InvalidPasswordTest extends BaseTest {
         registerPage.waitLoadPage();
         registerPage.clickButtonRegister();
         registerPage.register(NAME, EMAIL, PASSWORD);
-        loginPage.findTextIncorrectPassword();
+        assertTrue(loginPage.isTextIncorrectPassword());
     }
 
 }

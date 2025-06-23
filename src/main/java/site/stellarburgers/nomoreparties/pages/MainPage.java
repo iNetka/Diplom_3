@@ -36,7 +36,7 @@ public class MainPage {
     //регистрация
 
 
-    private By sectionBuns = By.xpath("//div[contains(@class,'tab_tab_type_current') and .//span[text()='Булки']]");
+    private By sectionBuns = By.xpath(".//div/span[text() = 'Булки']");
     //раздел "булки"
     private By sectionSauce = By.xpath(".//div/span[text() = 'Соусы']");
     //раздел "соусы"
@@ -62,21 +62,24 @@ public class MainPage {
     public void clickAccountButton() {
         driver.findElement(accountProfile).click();
     }
+
     @Step("Клик по элементу email")
     public void clickEmailButton() {
         driver.findElement(emailField).click();
     }
+
     @Step("Клик по элементу регистрация")
     public void clickRegisterFieldButton() {
         driver.findElement(registerField).click();
     }
+
     @Step("Ожидание элемента")
     public void waitLoadPage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(mainButton));
     }
 
-    public boolean checkIfConstructorTitleVisible(){
+    public boolean checkIfConstructorTitleVisible() {
         return driver.findElement(constructorTitle).isDisplayed();
     }
 
@@ -90,6 +93,7 @@ public class MainPage {
     public void clickMainButton() {
         driver.findElement(mainButton).click();
     }
+
     @Step("Шаг ожидание поля главной")
     public void waitMain() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -116,34 +120,44 @@ public class MainPage {
         driver.findElement(enterAccountButton).click();
     }
 
-    public boolean checkFillings(){
-        return driver.findElement(sectionFilling).isDisplayed();
+    public boolean checkFillings() {
+        return driver.findElement(selectedSectionFilling).isDisplayed();
     }
 
-    public boolean checkSauce(){
-        return driver.findElement(sectionSauce).isDisplayed();
+    public boolean checkSauce() {
+        return driver.findElement(selectedSectionSauce).isDisplayed();
     }
 
-    public boolean checkBuns(){
-        return driver.findElement(sectionBuns).isDisplayed();
+    public boolean checkBuns() {
+        return driver.findElement(selectedSectionBuns).isDisplayed();
     }
 
-    @Step("Клик по разделу Булки")
+
+    @Step("Клик по разделу Булки и проверка, что раздел активен")
     public void clickSectionBuns() {
         driver.findElement(sectionBuns).click();
         waitBuns();
+        if (!driver.findElement(selectedSectionBuns).isDisplayed()) {
+            throw new AssertionError("Раздел 'Булки' не стал активным после клика");
+        }
     }
 
-    @Step("Клик по разделу Соусы")
+    @Step("Клик по разделу Соусы и проверка, что раздел активен")
     public void clickSectionSauce() {
         driver.findElement(sectionSauce).click();
         waitSauce();
+        if (!driver.findElement(selectedSectionSauce).isDisplayed()) {
+            throw new AssertionError("Раздел 'Соусы' не стал активным после клика");
+        }
     }
 
-    @Step("Клик по разделу Начинки")
+    @Step("Клик по разделу Начинки и проверка, что раздел активен")
     public void clickSectionFilling() {
         driver.findElement(sectionFilling).click();
         waitFilling();
+        if (!driver.findElement(selectedSectionFilling).isDisplayed()) {
+            throw new AssertionError("Раздел 'Начинки' не стал активным после клика");
+        }
     }
 
     @Step("Ожидание раздела булки")
@@ -151,6 +165,7 @@ public class MainPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(selectedSectionBuns));
     }
+
     @Step("Переключение между разделами")
     public void switchingLogic() {
         MainPage mainPage = new MainPage(driver);
@@ -171,3 +186,4 @@ public class MainPage {
     }
 
 }
+

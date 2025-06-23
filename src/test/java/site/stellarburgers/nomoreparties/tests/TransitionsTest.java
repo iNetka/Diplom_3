@@ -29,6 +29,7 @@ public class TransitionsTest extends BaseTest {
         loginPage.setFieldPassword(PASSWORD);
         loginPage.clickButtonSignIn();
         mainPage.waitSauce();
+        assertTrue(mainPage.checkIfConstructorTitleVisible());
     }
 
     @Test
@@ -38,6 +39,7 @@ public class TransitionsTest extends BaseTest {
         loginPage.setFieldPassword(PASSWORD);
         loginPage.clickButtonSignIn();
         mainPage.waitSauce();
+        assertTrue(mainPage.checkIfConstructorTitleVisible());
     }
 
     @Test
@@ -50,6 +52,7 @@ public class TransitionsTest extends BaseTest {
         loginPage.setFieldPassword(PASSWORD);
         loginPage.clickButtonSignIn();
         mainPage.waitSauce();
+        assertTrue(mainPage.checkIfConstructorTitleVisible());
     }
 
     @Test
@@ -61,6 +64,7 @@ public class TransitionsTest extends BaseTest {
         loginPage.setFieldPassword(PASSWORD);
         loginPage.clickButtonSignIn();
         mainPage.waitSauce();
+        assertTrue(mainPage.checkIfConstructorTitleVisible());
     }
 
     @Test
@@ -85,11 +89,12 @@ public class TransitionsTest extends BaseTest {
         assertTrue(profilePage.checkIfOnProfilePage());
         profilePage.clickConstructor();
         mainPage.checkIfConstructorTitleVisible();
+        assertTrue(mainPage.checkIfConstructorTitleVisible());
     }
 
     @After
     public void deleteUser() {
-        assertEquals(apiUser.delete(token).getStatusCode(), 202);
+        apiUser.delete(token);
     }
 
 

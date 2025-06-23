@@ -7,26 +7,24 @@ import static org.junit.Assert.assertTrue;
 public class SwitchToPersonaFieldsTest extends BaseTest {
 
     @Test
-    public void checkFilling() {
-        mainPage.clickSectionFilling();
-        mainPage.waitFilling();
-        assertTrue(mainPage.checkFillings());
-    }
-
-    @Test
-    public void checkSectionSauce() {
-        mainPage.clickSectionSauce();
-        mainPage.waitSauce();
-        assertTrue(mainPage.checkSauce());
-    }
-
-    @Test
-    public void checkSectionBuns() {
+    public void clickBunsSectionButtonTest() {
         mainPage.clickSectionSauce();
         mainPage.clickSectionBuns();
         mainPage.waitBuns();
-        assertTrue(mainPage.checkBuns());
+        assertTrue("Раздел 'Булки' не отображается", mainPage.checkBuns());
     }
 
+    @Test
+    public void clickSaucesSectionButtonTest() {
+        mainPage.clickSectionSauce();
+        mainPage.waitSauce();
+        assertTrue("Раздел 'Соусы' не отображается", mainPage.checkSauce());
+    }
 
+    @Test
+    public void clickFillingsSectionButtonTest() {
+        mainPage.clickSectionFilling();
+        mainPage.waitFilling();
+        assertTrue("Раздела 'Начинки' не отображается", mainPage.checkFillings());
+    }
 }

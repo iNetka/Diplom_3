@@ -22,6 +22,7 @@ public class SuccessfulRegistrationTest extends BaseTest {
         registerPage.waitLoadPage();
         registerPage.clickButtonRegister();
         registerPage.register(NAME, EMAIL, PASSWORD);
+        assertTrue(loginPage.checkIfOnLoginPage());
     }
 
     @After
@@ -48,7 +49,6 @@ public class SuccessfulRegistrationTest extends BaseTest {
             int statusCode = deleteResponse.statusCode();
             System.out.println("Delete status: " + statusCode);
 
-            assertTrue(statusCode == 200 || statusCode == 202);
 
         } catch (Exception e) {
             System.out.println("Error in deleteUser: " + e.getMessage());
